@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth DanX DB</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                <img class="logo" src="https://files.catbox.moe/8k760x.jpg" alt="Logo DanX" />
+                DanX Database Auth
+            </h1>
+            <p>Kelola file JSON di repository GitHub Anda dengan mudah.</p>
+        </header>
+        
+        <div class="main-content">
+            <!-- Authentication Section -->
+            <div class="auth-section" id="authSection">
+                <div class="logo-container">
+                    <div class="logo">
+                        <i class="fas fa-database"></i>
+                    </div>
+                </div>
+                
+                <h2 class="section-title">
+                    <i class="fas fa-key"></i>
+                    Autentikasi Akses
+                </h2>
+                
+                <div class="form-group">
+                    <label for="accessKey">Kunci Akses</label>
+                    <input type="password" id="accessKey" placeholder="Masukkan kunci akses">
+                </div>
+                
+                <button class="btn" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> Masuk
+                </button>
+                
+                <div class="security-note">
+                    <i class="fas fa-shield-alt"></i>
+                    Kunci akses diperlukan untuk mengamankan data Anda. Pastikan kunci akses Anda kuat dan rahasia.
+                </div>
+            </div>
+            
+            <!-- CRUD Operations Section -->
+            <div class="crud-section hidden" id="crudSection">
+                <h2 class="section-title">
+                    <i class="fas fa-edit"></i>
+                    Kelola Data JSON
+                </h2>
+                
+                <div class="tab-container">
+                    <div class="tabs">
+                        <button class="tab active" data-tab="add">Tambah Data</button>
+                        <button class="tab" data-tab="edit">Edit Data</button>
+                        <button class="tab" data-tab="delete">Hapus Data</button>
+                        <button class="tab" data-tab="view">Lihat Data</button>
+                    </div>
+                    
+                    <!-- Notification Area -->
+                    <div id="notificationArea"></div>
+                    
+                    <!-- Add Data Tab -->
+                    <div class="tab-content active" id="addTab">
+                        <div class="form-group">
+                            <label for="id">ID</label>
+                            <input type="number" id="id" placeholder="Masukkan ID unik">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="ip">IP Address</label>
+                            <input type="text" id="ip" placeholder="Contoh: 174.138.23.0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" placeholder="Masukkan username">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="Masukkan password">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="access">Akses</label>
+                            <select id="access">
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="banned">Status Banned</label>
+                            <select id="banned">
+                                <option value="false">False</option>
+                                <option value="true">True</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bannedReason">Alasan Banned</label>
+                            <textarea id="bannedReason" placeholder="Masukkan alasan jika status banned true"></textarea>
+                        </div>
+                        
+                        <button class="btn btn-success" id="addBtn">
+                            <i class="fas fa-plus-circle"></i> Tambah Data
+                        </button>
+                    </div>
+                    
+                    <!-- Edit Data Tab -->
+                    <div class="tab-content" id="editTab">
+                        <div class="form-group">
+                            <label for="editId">ID untuk Edit</label>
+                            <input type="number" id="editId" placeholder="Masukkan ID yang ingin diedit">
+                        </div>
+                        
+                        <button class="btn btn-warning" id="findBtn">
+                            <i class="fas fa-search"></i> Cari Data
+                        </button>
+                        
+                        <div id="editForm" class="hidden">
+                            <div class="form-group">
+                                <label for="editIp">IP Address</label>
+                                <input type="text" id="editIp">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editUsername">Username</label>
+                                <input type="text" id="editUsername">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editPassword">Password</label>
+                                <input type="password" id="editPassword">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editAccess">Akses</label>
+                                <select id="editAccess">
+                                    <option value="admin">Admin</option>
+                                    <option value="user">User</option>
+                                    <option value="guest">Guest</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editBanned">Status Banned</label>
+                                <select id="editBanned">
+                                    <option value="false">False</option>
+                                    <option value="true">True</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="editBannedReason">Alasan Banned</label>
+                                <textarea id="editBannedReason"></textarea>
+                            </div>
+                            
+                            <button class="btn btn-success" id="updateBtn">
+                                <i class="fas fa-save"></i> Perbarui Data
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Delete Data Tab -->
+<div class="tab-content" id="deleteTab">
+    <div class="form-group">
+        <label for="deleteId">ID untuk Dihapus</label>
+        <input type="number" id="deleteId" placeholder="Masukkan ID yang ingin dihapus dan tekan Enter">
+    </div>
+    
+    <div id="deletePreview" class="hidden">
+        <div class="form-group">
+            <label>Data yang akan dihapus:</label>
+            <div id="deleteDataPreview" style="background-color: rgba(15, 23, 42, 0.7); padding: 15px; border-radius: 8px; margin-top: 10px;"></div>
+        </div>
+        
+        <button class="btn btn-danger" id="confirmDeleteBtn">
+            <i class="fas fa-trash-alt"></i> Konfirmasi Hapus
+        </button>
+    </div>
+</div>
+
+                    
+                    <!-- View Data Tab -->
+                    <div class="tab-content" id="viewTab">
+                        <button class="btn" id="refreshBtn">
+                            <i class="fas fa-sync-alt"></i> Muat Ulang Data
+                        </button>
+                        
+                        <div class="data-table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>IP</th>
+                                        <th>Username</th>
+                                        <th>Akses</th>
+                                        <th>Banned</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dataTableBody">
+                                    <!-- Data akan dimuat di sini -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2024-2025 DanX</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="config.js"></script>
+</body>
+</html>
