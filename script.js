@@ -5,7 +5,7 @@ const GITHUB_CONFIG = {
     REPO_OWNER: "DaniBotJs", // Ganti dengan username GitHub Anda
     REPO_NAME: "Auth", // Ganti dengan nama repository
     FILE_PATH: "Auth.json", // Path ke file JSON di repo
-    TOKEN: "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" // Token GitHub Anda (HARUS diganti)
+    TOKEN: "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" // Token GitHub Anda (HARUS diganti)
 };
 
 // DOM Elements
